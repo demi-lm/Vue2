@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>引出生命周期</title>
+    <script type="text/javascript" src="../../vue.js"></script>
+
+</head>
+
+<body>
+    <div id="root">
+        <h2 :style="{opacity} ">欢迎学习Vue</h2>
+    </div>
+
+
+</body>
+<script type="text/javascript">
+    Vue.config.productionTip = false //设置为 false 以阻止 vue 在启动时生成生产提示。
+
+
+    new Vue({
+        el: '#root',
+        data: {
+            opacity: 1
+        },
+        methods: {
+            // change() {
+            //     setInterval(() => {
+            //         this.opacity -= 0.01
+            //         if (this.opacity <= 0) vm.opacity = 1
+            //     }, 16)
+            // }
+            //无法实现，没有事件触发，变成插值语法则重复调用多次
+        },
+        mounted() {
+            //Vue完成模板解析并把初始的真实元素放入页面（挂载完毕），调用mounted
+            //this就是mounted
+            setInterval(() => {
+                    this.opacity -= 0.01
+                    if (this.opacity <= 0) vm.opacity = 1
+                }, 16)
+        },
+    })
+
+    //通过外部定时器推荐
+    // setInterval(() => {
+    //     vm.opacity -= 0.01
+    //     if (vm.opacity <= 0) vm.opacity = 1
+    // }, 16)
+</script>
+
+</html>

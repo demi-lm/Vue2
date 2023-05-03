@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>v-html</title>
+    <script type="text/javascript" src="../../vue.js"></script>
+    <script type="text/javascript" src="../dayjs.min.js"></script>
+</head>
+
+<body>
+    <div id="root">
+        <div>{{name}}</div>
+        <div v-html="str"></div>
+    </div>
+    
+
+</body>
+<script type="text/javascript">
+    Vue.config.productionTip = false //设置为 false 以阻止 vue 在启动时生成生产提示。
+    Vue.filter('mySlice', function (value) {
+        return value.slice(0, 4)
+    })
+    const vm = new Vue({
+        el: '#root',
+        data: {
+            name: '库洛米',
+            str:'<h3>111</h3>'
+        },
+
+
+    })
+</script>
+
+</html>

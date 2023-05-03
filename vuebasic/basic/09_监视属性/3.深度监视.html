@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>深度监视</title>
+    <!-- 引入Vue -->
+    <script type="text/javascript" src="../../vue.js"></script>
+</head>
+
+<body>
+    <div id="root">
+        <h2>今天天气很{{info}}</h2>
+        <button @click="change">切换天气</button>
+        <hr>
+        <h3>a的值是{{numbers.a}}</h3>
+        <button @click="numbers.a++">点我让a+1</button>
+        <h3>b的值是{{numbers.b}}</h3>
+        <button @click="numbers.b++">点我让a+1</button>
+    </div>
+
+</body>
+<script type="text/javascript">
+    Vue.config.productionTip = false //设置为 false 以阻止 vue 在启动时生成生产提示。
+    const vm = new Vue({
+        el: '#root',
+        data: {
+            isHot: true,
+            numbers: {
+                a: 1,
+                b: 1
+            }
+        },
+        computed: {
+            info() {
+                return this.isHot ? '炎热' : '凉爽'
+            }
+        },
+        methods: {
+            change() {
+                this.isHot = !this.isHot
+            }
+        },
+        watch: {
+            isHot: {
+                // immediate: true, //初始化让handler调用一下
+                //isHot发生改变时被调用,newValue修改后的值，oldValue修改前的值
+                handler(newValue, oldValue) {
+                    console.log('变了');
+                }
+            },
+            //监测多级结构中某个属性的变化
+            // 'numbers.a': {
+            //     handler(newValue, oldValue) {
+            //         console.log('变了');
+            //     }
+            // },
+
+            //检测不到，因为numbers是对象在Vue中的地址，里面改变的值变了，但是内存地址没变
+            numbers: {
+                deep: true, //默认是false，变成true之后深度监视
+                handler(newValue, oldValue) {
+                    console.log('变了');
+                }
+            },
+
+        }
+    })
+</script>
+
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>VueComponent</title>
+    <!-- 引入Vue -->
+    <script type="text/javascript" src="../../vue.js"></script>
+</head>
+
+<body>
+    <!-- 准备好一个容器 -->
+    <div id="root">
+        <school></school>
+    </div>
+
+    <script type="text/javascript">
+        Vue.config.productionTip = false //设置为 false 以阻止 vue 在启动时生成生产提示。
+
+        const school = Vue.extend({
+            template: `
+            <div>
+            <h2>学校名：{{schoolName}}</h2>
+            <h2>学校地址：{{address}}</h2>
+            </div> `,
+            data() {
+                return {
+                    schoolName: 'dadafsg',
+                    address: '上海',
+                }
+            },
+
+        })
+
+        new Vue({
+            el: '#root',
+            components: {
+                school,
+            }
+        })
+    </script>
+</body>
+
+</html>

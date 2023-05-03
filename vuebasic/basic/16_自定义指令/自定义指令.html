@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>自定义指令</title>
+    <script type="text/javascript" src="../../vue.js"></script>
+
+</head>
+
+<body>
+    <div id="root">
+        <h2>当前的n值是<span v-text="n"></span></h2>
+        <h2>放大的n值是<span v-big="n"></span></h2>
+        <button @click="n++">点我n+1</button>
+        <hr>
+        <input type="text" v-fbind:value='n'>
+    </div>
+
+
+</body>
+<script type="text/javascript">
+    Vue.config.productionTip = false //设置为 false 以阻止 vue 在启动时生成生产提示。
+    Vue.directive('fbind', { //全局指令
+        bind(element, binding) {
+            element.value = binding.value
+        },
+        insertrd(element, binding) {
+            element.focus()
+        },
+        update(element, binding) {
+            element.value = binding.value
+        }
+    })
+    Vue.directive('big', function (element, binding) { //a是真实dom
+        element.innerText = binding.value * 10
+    }, )
+
+    const vm = new Vue({
+        el: '#root',
+        data: {
+            n: 1
+        },
+        directives: { //局部指令
+            //big函数什么时候被调用：1. 指令和元素成功绑定（一上来）2. 指令所在的模板被重新解析时
+            big(element, binding) { //a是真实dom
+                element.innerText = binding.value * 10
+            },
+            // fbind(element, binding) {
+            //     element.value = binding.value
+            //     element.focus() //不奏效，因为绑定是在内存里有的模板，还没编译在网页上显示
+            // },
+            fbind: {
+                //指令与元素成功绑定时（一上来）
+                bind(element, binding) {
+                    element.value = binding.value
+                },
+                //指令所在元素插入页面时
+                insertrd(element, binding) {
+                    element.focus()
+                },
+                // 指令所在模板重新解析时
+                update(element, binding) {
+                    element.value = binding.value
+                }
+            }
+        }
+
+
+    })
+</script>
+
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>深度监视 _简写</title>
+    <!-- 引入Vue -->
+    <script type="text/javascript" src="../../vue.js"></script>
+</head>
+
+<body>
+    <div id="root">
+        <h2>今天天气很{{info}}</h2>
+        <button @click="change">切换天气</button>
+
+    </div>
+
+</body>
+<script type="text/javascript">
+    Vue.config.productionTip = false //设置为 false 以阻止 vue 在启动时生成生产提示。
+    const vm = new Vue({
+        el: '#root',
+        data: {
+            isHot: true,
+
+        },
+        computed: {
+            info() {
+                return this.isHot ? '炎热' : '凉爽'
+            }
+        },
+        methods: {
+            change() {
+                this.isHot = !this.isHot
+            }
+        },
+        watch: {
+            //正常写法
+            // isHot: {
+
+            //     // immediate: true, //初始化让handler调用一下
+            //     // deep:true,//深度监视
+            //     handler(newValue, oldValue) {
+            //         console.log('变了');
+            //     }
+            // },
+            //没有其他配置项时可以简写
+            // isHot() {
+            //     console.log('变了');
+
+            // }
+        }
+    })
+
+    //正常写法
+    // vm.$watch('isHot', {
+    //     immediate: true, //初始化让handler调用一下
+    //     deep:true,//深度监视
+    //     handler(newValue, oldValue) {
+    //         console.log('变了');
+    //     }
+    // })
+
+    //简写
+    vm.$watch('isHot',function(newValue, oldValue){
+        console.log('变了',newValue, oldValue);
+    })
+</script>
+
+</html>

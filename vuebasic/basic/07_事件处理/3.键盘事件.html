@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>事件修饰符</title>
+    <!-- 引入Vue -->
+    <script type="text/javascript" src="../../vue.js"></script>
+    <style>
+        * {
+            margin-top: 20px;
+        }
+
+        .demo1 {
+            height: 50px;
+            background-color: aquamarine;
+        }
+
+        .box1 {
+            padding: 5px;
+            background-color: blue;
+
+        }
+
+        .box2 {
+            padding: 5px;
+            background-color: blueviolet
+        }
+
+        .list {
+            width: 200px;
+            height: 200px;
+            background-color: chartreuse;
+            overflow: auto;
+        }
+
+        li {
+            height: 100px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="root">
+<h2>hello{{name}}</h2>
+<!-- keydown按下键盘不用抬起来就触发，keyup抬起来才触发 .enter判断是不是回车键 -->
+<input type="text" placeholder="按下回车提示输入" @keyup.enter="showInfo">
+    </div>
+
+</body>
+<script type="text/javascript">
+    Vue.config.productionTip = false //设置为 false 以阻止 vue 在启动时生成生产提示。
+    new Vue({
+        el: '#root',
+        data: {
+            name: 'aaa'
+        },
+        methods:{
+            showInfo(e){
+                // if(e.keyCode!==13)return
+               console.log(e.target.value); 
+            }
+        }
+        
+    })
+</script>
+
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>初识Vue</title>
+    <!-- 引入Vue -->
+    <script type="text/javascript" src="../../vue.js"></script>
+</head>
+
+<body>
+    <!-- 准备好一个容器 -->
+    <div id="root">
+        <h1>你好，{{name}}</h1>
+    </div>
+    <script type="text/javascript">
+        Vue.config.productionTip = false //设置为 false 以阻止 vue 在启动时生成生产提示。
+        //el的两种写法
+        // const v = new Vue({
+        //     // el: '#root', //第一种写法
+        //     data: {
+        //         name: '库洛米'
+        //     }
+        // })
+        // console.log(v)
+        // v.$mount('#root') //第二种写法，挂载
+
+        //data的两种写法
+        new Vue({
+            el: '#root',
+            //data的第一种写法，对象式
+            // data: {
+            //     name: '库洛米'
+            // }
+
+            //data的第二种写法，函数式（大部分用这个）Vue调用的function，不能写成箭头函数
+            data() {
+                console.log('@@@', this) //此处的this是vue实例对象
+                return {
+                    name: '库洛米'
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

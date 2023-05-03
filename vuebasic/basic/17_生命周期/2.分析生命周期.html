@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>分析生命周期</title>
+    <script type="text/javascript" src="../../vue.js"></script>
+
+</head>
+
+<body>
+    <div id="root">
+        <h2>{{n}}</h2>
+        <h2 v-text="n"></h2>
+        <button @click="add">dianwo</button>
+        <button @click="bye">点我销毁</button>
+    </div>
+
+
+</body>
+<script type="text/javascript">
+    Vue.config.productionTip = false //设置为 false 以阻止 vue 在启动时生成生产提示。
+
+    new Vue({
+        el: '#root',
+        // template:'<div><h2>{{n}}</h2><button @click="add">dianwo</button> </div>',
+        //完全替换div root 的内容
+        data: {
+            n: 1
+        },
+        methods: {
+            add(){
+                this.n++
+            },
+            bye(){
+                this.$destroy('bye')
+                //vm销毁了，渲染的页面没销毁
+                //完全销毁一个实例，清理他与其他实例的连接，解绑他的全部指令及事件监视器(自定义事件)
+            }
+        },
+        beforeCreate() {
+            console.log('beforeCreate');
+        },
+        created() {
+            console.log('created');  
+        },
+        beforeMount() {
+            console.log('beforeMount');  
+            
+        },
+        mounted() {
+            console.log('mounted');  
+            
+        },
+        beforeUpdate() {
+            console.log('beforeUpdate');  
+            // console.log(this.n);
+            // debugger;
+        },
+        updated() {
+            console.log('updated');
+        },
+        beforeDestroy() {
+            console.log('beforeDestroy');
+        },
+        destroyed() {
+            console.log('destroyed');          
+        },
+        
+    })
+
+</script>
+
+</html>
